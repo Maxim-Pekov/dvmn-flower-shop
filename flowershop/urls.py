@@ -23,7 +23,12 @@ from bucketorderapp import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('catalog/', views.catalog_view, name='catalog'),
-
+    path('quiz/', views.quiz_view, name='quiz'),
+    path('quiz_step/', views.quiz_step_view, name='quiz_step'),
+    path('result/', views.result_view, name='result'),
+    path('consultation/', views.consultation_view, name='consultation'),
+    path('order/', views.order_view, name='order'),
+    path('order_step/', views.order_step_view, name='order_step'),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
