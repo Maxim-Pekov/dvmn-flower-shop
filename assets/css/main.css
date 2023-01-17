@@ -84,7 +84,7 @@ input::placeholder {
 }
 
 .mainBg {
-	background: url('../img/mainBg.jpg') no-repeat;
+	background: url('../images/mainBg.jpg') no-repeat;
 	background-size: cover;
 	position: relative;
 }
