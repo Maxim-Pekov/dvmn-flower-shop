@@ -17,5 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('catalog/', views.catalog_view, name='catalog'),
+
     path('admin/', admin.site.urls),
 ]
