@@ -171,13 +171,13 @@ bottom: 0;
 	margin-right: 0;
 }
 .recommended__block_first {
-	background: url('../img/recommendedBg1.jpg') no-repeat center bottom / cover;
+	background: url('../images/recommendedBg1.jpg') no-repeat center bottom / cover;
 }
 .recommended__block_sec {
-	background: url('../img/recommendedBg2.jpg') no-repeat center bottom / cover;
+	background: url('../images/recommendedBg2.jpg') no-repeat center bottom / cover;
 }
 .recommended__block_thr {
-	background: url('../img/recommendedBg3.jpg') no-repeat center bottom / cover;
+	background: url('../images/recommendedBg3.jpg') no-repeat center bottom / cover;
 }
 .recommended__block_elems {
 	width: 100%;
@@ -332,16 +332,16 @@ opacity: 0.3;
 	margin-bottom: 10px;
 }
 .recommended__elems_first .recommended__block_sec {
-	background: url('../img/catalog/catalogBg1.jpg') no-repeat center bottom / cover;
+	background: url('../images/catalog/catalogBg1.jpg') no-repeat center bottom / cover;
 }
 .recommended__elems_first .recommended__block_thr {
-	background: url('../img/catalog/catalogBg2.jpg') no-repeat center bottom / cover;
+	background: url('../images/catalog/catalogBg2.jpg') no-repeat center bottom / cover;
 }
 .recommended__elems_sec .recommended__block_first {
-	background: url('../img/catalog/catalogBg3.jpg') no-repeat center bottom / cover;
+	background: url('../images/catalog/catalogBg3.jpg') no-repeat center bottom / cover;
 }
 .recommended__elems_sec .recommended__block_sec {
-	background: url('../img/catalog/catalogBg4.jpg') no-repeat center bottom / cover;
+	background: url('../images/catalog/catalogBg4.jpg') no-repeat center bottom / cover;
 }
 
 
