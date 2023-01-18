@@ -33,14 +33,18 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">На какой бюджет рассчитываете?</h1>
 					<div class="quiz__elems fic">
-						<a href="{% url 'result' %}"><button class="quiz__elem">До 1 000 руб</button></a>
-						<a href="{% url 'result' %}"><button class="quiz__elem">1 000 - 5 000 руб</button></a>
-						<a href="{% url 'result' %}"><button class="quiz__elem">от 5 000 руб</button></a>
-						<a href="{% url 'result' %}"><button class="quiz__elem">Не имеет значения</button></a>
+						<form action="/result/" method="post">
+							{% csrf_token %}
+							<input name="occasion" value="{{ occasion }}" type="hidden">
+							<a href="{% url 'result' %}"><button class="quiz__elem" name="budget" value="1000">До 1 000 руб</button></a>
+							<a href="{% url 'result' %}"><button class="quiz__elem" name="budget" value="5000">1 000 - 5 000 руб</button></a>
+							<a href="{% url 'result' %}"><button class="quiz__elem" name="budget" value="10000">от 5 000 руб</button></a>
+							<a href="{% url 'result' %}"><button class="quiz__elem" name="budget" value="None">Не имеет значения</button></a>
+						</form>
 					</div>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">
-							<span class="quiz__progress_num">1</span>
+							<span class="quiz__progress_num">2</span>
 							<span class="quiz__progress_in"> шаг из </span>
 							<span class="quiz__progress_num">2</span>
 						</div>

@@ -29,11 +29,12 @@
 				<div class="order__block">
 					<div class="order_items">
 						<div class="title">Оформление доставки</div>
-						<form action="#" class="order__form">
+						<form action="/order_step/" method="post" class="order__form">
+							{% csrf_token %}
 							<div class="order__form_block ficb">
-								<input type="text" name="fname" class="order__form_input" placeholder="Введите Имя" required>
-								<input type="text" name="tel" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
-								<input type="text" name="adres" class="order__form_input" placeholder="Адрес доставки" required>
+								<input type="text" name="name" class="order__form_input" placeholder="Введите Имя" required>
+								<input type="text" name="phone" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
+								<input type="text" name="address" class="order__form_input" placeholder="Адрес доставки" required>
 							</div>
 							<div class="order__form_btns fic">
 								<div class="order__form_radioBlock ">
