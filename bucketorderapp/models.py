@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Category(models.Model):
@@ -81,7 +82,9 @@ class Order(models.Model):
         Specialist,
         on_delete=models.CASCADE,
         related_name='orders',
-        verbose_name='Специалист'
+        verbose_name='Специалист',
+        null=True,
+        blank=True,
     )
     courier = models.ForeignKey(
         Courier,
@@ -91,9 +94,9 @@ class Order(models.Model):
         null=True,
         blank=True
     )
-    adress = models.CharField('Адрес', max_length=200, null=True, blank=True)
-    phone = models.CharField('Телефон', max_length=200, null=True, blank=True)
-    time = models.DateTimeField('Дата и время доставки', null=True, blank=True)
+    address = models.CharField('Адрес', max_length=200, null=True, blank=True)
+    phone = PhoneNumberField('Телефон', db_index=True)
+    delievry_date = models.DateTimeField('Дата и время доставки', null=True, blank=True)
 
     def __str__(self):
         return self.profile.name, self.bouquet.title
