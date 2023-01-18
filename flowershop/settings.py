@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "phonenumber_field",
     'bucketorderapp',
+    'paymentapp',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,6 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PHONENUMBER_DEFAULT_REGION = 'RU'
+
+YOOKASSA_API_KEY=env('YOOKASSA_API_KEY')
+YOOKASSA_SHOP_ID=env('YOOKASSA_SHOP_ID')
