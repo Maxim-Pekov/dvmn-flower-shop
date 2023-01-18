@@ -48,6 +48,10 @@ class Flower(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Цветок'
+        verbose_name_plural = 'Цветы'
+
 
 class Specialist(models.Model):
     name = models.CharField('Имя', max_length=100, unique=True)
@@ -67,6 +71,10 @@ class Courier(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Курьер'
+        verbose_name_plural = 'Курьеры'
 
 
 class Order(models.Model):
