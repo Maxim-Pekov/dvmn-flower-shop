@@ -85,6 +85,7 @@ class Order(models.Model):
     )
     courier = models.ForeignKey(
         Courier,
+        on_delete=models.CASCADE,
         related_name='orders',
         verbose_name='Курьер',
         null=True,
