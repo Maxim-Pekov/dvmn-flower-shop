@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -49,28 +48,9 @@ class Flower(models.Model):
         return self.title
 
 
-class Profile(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='profilies',
-        verbose_name='Пользователь'
-    )
-    adress = models.CharField('Адрес', max_length=200, null=True, blank=True)
-    phone = models.CharField('Телефон', max_length=200)
-    email = models.CharField('Емайл', max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
-
-
 class Specialist(models.Model):
     name = models.CharField('Имя', max_length=100, unique=True)
-    vacation = models.DateField('Даты отпуска')
+    vacation = models.DateField('Даты отпуска', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -82,19 +62,14 @@ class Specialist(models.Model):
 
 class Courier(models.Model):
     name = models.CharField('Имя', max_length=100, unique=True)
-    vacation = models.DateField('Даты отпуска')
+    vacation = models.DateField('Даты отпуска', null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Order(models.Model):
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='orders',
-        verbose_name='Профиль',
-    )
+    customer = models.CharField('Заказчик', max_length=100, unique=True)
     bouquet = models.ForeignKey(
         Bouquet,
         on_delete=models.CASCADE,
@@ -106,13 +81,18 @@ class Order(models.Model):
         Specialist,
         on_delete=models.CASCADE,
         related_name='orders',
-        verbose_name='Специалист',
+        verbose_name='Специалист'
     )
     courier = models.ForeignKey(
         Courier,
         related_name='orders',
         verbose_name='Курьер',
+        null=True,
+        blank=True
     )
+    adress = models.CharField('Адрес', max_length=200, null=True, blank=True)
+    phone = models.CharField('Телефон', max_length=200, null=True, blank=True)
+    time = models.DateTimeField('Дата и время доставки', null=True, blank=True)
 
     def __str__(self):
         return self.profile.name, self.bouquet.title
@@ -122,45 +102,8 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
 
-class Delivery(models.Model):
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='deliveries',
-        verbose_name='Профиль',
-    )
-    bouquet = models.ForeignKey(
-        Bouquet,
-        on_delete=models.CASCADE,
-        related_name='deliveries',
-        verbose_name='Букет',
-    )
-    delivery_at = models.DateTimeField('Дата и время формирования доставки', auto_now=True)
-    courier = models.ForeignKey(
-        Courier,
-        on_delete=models.CASCADE,
-        related_name='deliveries',
-        verbose_name='Курьер',
-    )
-    adress = models.CharField('Адрес доставки', max_length=100)
-    telephone = models.CharField('Номер телефона', max_length=100)
-    time = models.DateTimeField('Дата и время доставки')
-
-    def __str__(self):
-        return self.profile.name, self.bouquet.title
-
-    class Meta:
-        verbose_name = 'Доставка'
-        verbose_name_plural = 'Доставки'
-
-
 class Consultation(models.Model):
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE,
-        related_name='consultations',
-        verbose_name='Профиль',
-    )
+    customer = models.CharField('Заказчик', max_length=100, unique=True)
     specialist = models.ForeignKey(
         Specialist,
         on_delete=models.CASCADE,
