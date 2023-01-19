@@ -115,19 +115,22 @@ class Order(models.Model):
 
 
 class Consultation(models.Model):
-    customer = models.CharField('Заказчик', max_length=100, unique=True)
+    customer = models.CharField('Заказчик', max_length=100)
+    phone = PhoneNumberField('Телефон', db_index=True)
+
     specialist = models.ForeignKey(
         Specialist,
         on_delete=models.CASCADE,
         related_name='consultations',
         verbose_name='Специалист',
+        null=True,
     )
     time_at = models.DateTimeField('Дата и время формирования консультации', auto_now=True)
-    time_finish = models.DateTimeField('Дата и время окончания консультации')
+    time_finish = models.DateTimeField('Дата и время окончания консультации', null=True)
 
     def __str__(self):
-        return self.profile.user.username, self.specialist.name
+        return f'{self.customer}, {self.phone}'
 
     class Meta:
-        verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
+        verbose_name = 'Консультация'
+        verbose_name_plural = 'Консультации'

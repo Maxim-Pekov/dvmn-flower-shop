@@ -32,7 +32,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Consultation)
 class ConsultationAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'time_at', 'time_finish')
+    list_display = ('customer', 'phone', 'time_at', 'time_finish')
 
 
 @admin.register(Order)
