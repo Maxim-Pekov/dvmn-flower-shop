@@ -31,4 +31,5 @@ urlpatterns = [
     path('order_step/', views.order_step_view, name='order_step'),
     path('admin/', admin.site.urls),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
