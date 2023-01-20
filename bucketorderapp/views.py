@@ -1,9 +1,19 @@
-from django.shortcuts import render
 from .models import Bouquet
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from .forms import UserForm, ConsultationForm
 
 
 def index(request):
-    return render(request, 'index.html')
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('index'))
+        context = {'form': form}
+        return render(request, 'index.html', context)
+    context = {'form': UserForm()}
+    return render(request, 'index.html', context)
 
 
 def catalog_view(request):
@@ -45,7 +55,16 @@ def result_view(request):
 
 
 def consultation_view(request):
-    return render(request, 'consultation.html')
+
+    if request.method == "POST":
+        form = ConsultationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('consultation'))
+        context = {'form': form}
+        return render(request, 'consultation.html', context)
+    context = {'form': ConsultationForm()}
+    return render(request, 'consultation.html', context)
 
 
 def order_view(request):
