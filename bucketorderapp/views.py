@@ -17,7 +17,11 @@ def index(request):
 
 
 def catalog_view(request):
-    return render(request, 'catalog.html')
+    bouquets = Bouquet.objects.all()
+    context = {
+        'bouquets': bouquets
+    }
+    return render(request, 'catalog.html', context=context)
 
 
 def quiz_view(request):
@@ -86,4 +90,4 @@ def order_step_view(request):
 
 
 def recommend_bouquet(budget, occasion):
-    return Bouquet.objects.first()
+    return Bouquet.objects.order_by('?').first()
