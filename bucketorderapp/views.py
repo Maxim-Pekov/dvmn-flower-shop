@@ -51,6 +51,16 @@ def result_view(request):
             'flowers': flowers,
     }
 
+
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('result'))
+        context['form'] = form
+        return render(request, 'result.html', context)
+    context['form'] = UserForm()
+
     return render(request, 'result.html', context=context)
 
 
