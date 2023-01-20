@@ -97,7 +97,7 @@
 		<div class="container">
 			<div class="consultation">
 				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form" >
+				<form action="#" class="consultation__form" method="POST">
 					{% csrf_token %}
 						{{form}}
 					<button type="submit" class="consultation__form_btn">Отправить</button>
