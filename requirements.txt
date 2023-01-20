@@ -4,4 +4,4 @@ environs==9.5.0
 djangorestframework==3.14.0
 django-phonenumber-field==7.0.2
 phonenumbers==8.13.4
-yookassa==2.3.3
+Pillow~=9.4.0

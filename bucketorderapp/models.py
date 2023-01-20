@@ -21,6 +21,7 @@ class Bouquet(models.Model):
         blank=True,
         null=True
     )
+    image = models.ImageField(upload_to='bouquet_images/', blank=True)
     flowers = models.ManyToManyField(
         'Flower',
         related_name='bouquet_flowers',
