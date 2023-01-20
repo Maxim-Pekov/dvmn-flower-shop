@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Bouquet
 
 
 def index(request):
@@ -27,9 +28,20 @@ def result_view(request):
     budget = payload.get('budget')
     occasion = payload.get('occasion')
 
-    # TODO  отображение букета по параметрам из запроса, передача его в order/
+    bouquet = recommend_bouquet(budget, occasion)
+    if bouquet is None:
+        bouquet = {}
+        bouquet['title'] = 'Милорд, база букетов пуста'
+        bouquet['price'] = 0
+        flowers = None
+    else:
+        flowers = bouquet.flowers.all()
+    context = {
+            'bouquet': bouquet,
+            'flowers': flowers,
+    }
 
-    return render(request, 'result.html')
+    return render(request, 'result.html', context=context)
 
 
 def consultation_view(request):
@@ -42,3 +54,7 @@ def order_view(request):
 
 def order_step_view(request):
     return render(request, 'order-step.html')
+
+
+def recommend_bouquet(budget, occasion):
+    return Bouquet.objects.first()
