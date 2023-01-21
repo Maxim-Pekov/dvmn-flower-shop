@@ -45,6 +45,7 @@ class Bouquet(models.Model):
 
 class Flower(models.Model):
     title = models.CharField('Название', max_length=100, unique=True)
+    count_flower = models.PositiveSmallIntegerField('Кол-во в букете')
 
     def __str__(self):
         return self.title
