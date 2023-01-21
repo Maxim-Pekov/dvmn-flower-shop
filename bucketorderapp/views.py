@@ -91,3 +91,11 @@ def order_step_view(request):
 
 def recommend_bouquet(budget, occasion):
     return Bouquet.objects.order_by('?').first()
+
+
+def card_view(request, card_id: int):
+    bouquets = Bouquet.objects.filter(id=card_id)
+    context = {
+        'bouquet': bouquets[0]
+    }
+    return render(request, 'card.html', context)
