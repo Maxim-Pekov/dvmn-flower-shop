@@ -38,6 +38,7 @@ def quiz_step_view(request):
 
 
 def result_view(request):
+
     payload = dict(request.POST.items())
     budget = payload.get('budget')
     occasion = payload.get('occasion')
@@ -53,8 +54,8 @@ def result_view(request):
     context = {
             'bouquet': bouquet,
             'flowers': flowers,
+            'form': UserForm()
     }
-
 
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -63,7 +64,6 @@ def result_view(request):
             return redirect(reverse('result'))
         context['form'] = form
         return render(request, 'result.html', context)
-    context['form'] = UserForm()
 
     return render(request, 'result.html', context=context)
 
