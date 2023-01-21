@@ -30,6 +30,7 @@ urlpatterns = [
     path('order/', views.order_view, name='order'),
     path('order_step/', views.order_step_view, name='order_step'),
     path('admin/', admin.site.urls),
+    path('card/<int:card_id>/', views.card_view, name='card_view'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
