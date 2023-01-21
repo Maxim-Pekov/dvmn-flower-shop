@@ -30,25 +30,34 @@
 				<div class="catalog__block">
 					<div class="recommended__elems ficb recommended__elems_first">
 						<div class="recommended__block recommended__block_first">
+
 							<div class="recommended__block_elems ficb">
 								<span class="recommended__block_intro">{{ bouquets.0.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.0.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.0.image.url }})"></div>
+							<div class="catalog__image"
+								 style="background-image: url({{ bouquets.0.image.url }})" >
+								<a href="{% url 'card_view' bouquets.0.pk %}"></a>
+							</div>
+
 						</div>
 						<div class="recommended__block recommended__block_sec">
 							<div class="recommended__block_elems ficb">
 								<span class="recommended__block_intro">{{ bouquets.1.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.1.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.1.image.url }})"></div>
+							<div class="catalog__image" style="background-image: url({{ bouquets.1.image.url }})">
+								<a href="{% url 'card_view' bouquets.1.pk %}"></a>
+							</div>
 						</div>
 						<div class="recommended__block recommended__block_thr">
 							<div class="recommended__block_elems ficb" style="background-image: url({{ bouquets.2.image.url }})">
 								<span class="recommended__block_intro">{{ bouquets.2.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.2.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.2.image.url }})"></div>
+							<div class="catalog__image" style="background-image: url({{ bouquets.2.image.url }})">
+								<a href="{% url 'card_view' bouquets.2.pk %}"></a>
+							</div>
 						</div>
 						
 
@@ -59,21 +68,27 @@
 								<span class="recommended__block_intro">{{ bouquets.3.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.3.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.3.image.url }})"></div>
+							<div class="catalog__image" style="background-image: url({{ bouquets.3.image.url }})">
+								<a href="{% url 'card_view' bouquets.3.pk %}"></a>
+							</div>
 						</div>
 						<div class="recommended__block recommended__block_sec">
 							<div class="recommended__block_elems ficb">
 								<span class="recommended__block_intro">{{ bouquets.4.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.4.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.4.image.url }})"></div>
+							<div class="catalog__image" style="background-image: url({{ bouquets.4.image.url }})">
+								<a href="{% url 'card_view' bouquets.4.pk %}"></a>
+							</div>
 						</div>
 						<div class="recommended__block recommended__block_thr">
 							<div class="recommended__block_elems ficb" style="background-image: url({{ bouquets.5.image.url }})">
 								<span class="recommended__block_intro">{{ bouquets.5.title }}</span>
 								<span class="recommended__block_price"> {{ bouquets.5.price }} руб</span>
 							</div>
-							<div class="catalog__image" style="background-image: url({{ bouquets.5.image.url }})"></div>
+							<div class="catalog__image" style="background-image: url({{ bouquets.5.image.url }})">
+								<a href="{% url 'card_view' bouquets.5.pk %}"></a>
+							</div>
 						</div>
 					</div>
 					<button class="btn largeBtn catalog__btn">Показать ещё</button>
