@@ -87,10 +87,22 @@ def consultation_view(request):
 
 
 def order_view(request):
-    return render(request, 'order.html')
+    context = {}
+    if request.method == "POST":
+        context['bouquet_title'] = request.POST['bouquet_title']
+        context['bouquet_price'] = request.POST['bouquet_price']
+        return render(request, 'order.html', context=context)
+    return render(request, 'order.html', context=context)
 
 
 def order_step_view(request):
+    context = {}
+    if request.method == "POST":
+        print(request.POST)
+        context['bouquet_title'] = request.POST['bouquet_title']
+        context['bouquet_price'] = request.POST['bouquet_price']
+        print(context)
+        return render(request, 'order-step.html', context=context)
     return render(request, 'order-step.html')
 
 

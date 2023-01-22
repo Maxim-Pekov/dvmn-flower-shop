@@ -29,30 +29,33 @@
 				<div class="order__block">
 					<div class="order_items">
 						<div class="title">Оплата</div>
+						<div id="payment_title" class="title result__items_title">{{ bouquet_title }}</div>
+						<div id="payment_price" class="result__items_price">{{ bouquet_price }}</div>
 						<form action="#" class="order__form orderStep_form">
 							<div class="order__form_block">
 								<div class="order__form_items">
 									<div class="order__form_intro">номер карты</div>
-									<input type="text" name="cardNum" class="order__form_input orderStep_form_input" placeholder="Введите номер" required>
+									<input id="cardNum" type="text" name="cardNum" class="order__form_input orderStep_form_input" placeholder="Введите номер" required>
 									<div class="order__form_item fic">
-										<input type="text" name="cardMm" class="order__form_input orderStep_form_input" placeholder="ММ" required>
-										<input type="text" name="cardGg" class="order__form_input orderStep_form_input" placeholder="ГГ" required>
+										<input id="cardMonth" type="text" name="cardMm" class="order__form_input orderStep_form_input" placeholder="ММ" required>
+										<input id="cardYear" type="text" name="cardGg" class="order__form_input orderStep_form_input" placeholder="ГГ" required>
 									</div>
 									
-									<input type="text" name="cardFname" class="order__form_input orderStep_form_input" placeholder="Имя владельца" required>
-									<input type="text" name="cardCvc" class="order__form_input orderStep_form_input" placeholder="CVC" required>
+									<input id="cardName" type="text" name="cardFname" class="order__form_input orderStep_form_input" placeholder="Имя владельца" required>
+									<input id="cardCVC" type="text" name="cardCvc" class="order__form_input orderStep_form_input" placeholder="CVC" required>
 								</div>
 								<div class="order__form_items">
 									<div class="order__form_intro">Ваш e-mail (необязательно)</div>
 									<input type="email" name="mail" class="order__form_input orderStep_form_input" placeholder="pochta@mail.ru">
 								</div>
 							</div>
+							<div id="message_line"></div>
 							<div class="order__form_line"></div>
-							<div class="order__form_btns ficb">
-								<button class="btn order__form_pay">Оплатить</button>
-								<button class="btn order__form_btn">Назад</button>
-							</div>
 						</form>
+						<div class="order__form_btns ficb">
+							<button class="btn order__form_pay">Оплатить</button>
+							<button class="btn order__form_btn">Назад</button>
+						</div>
 					</div>
 					<!-- <div class="blockImgHiden"></div> -->
 				</div>
@@ -77,5 +80,8 @@
 			</div>
 		</div>
 	</footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://static.yoomoney.ru/checkout-js/v1/checkout.js"></script>
+	<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
