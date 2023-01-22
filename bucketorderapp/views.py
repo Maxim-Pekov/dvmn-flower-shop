@@ -5,14 +5,19 @@ from .forms import UserForm, ConsultationForm
 
 
 def index(request):
+    bouquets = Bouquet.objects.all()
+
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(reverse('index'))
-        context = {'form': form}
+        context = {'form': form, 'bouquets': bouquets}
         return render(request, 'index.html', context)
-    context = {'form': UserForm()}
+    context = {
+        'form': UserForm(),
+        'bouquets': bouquets
+    }
     return render(request, 'index.html', context)
 
 
