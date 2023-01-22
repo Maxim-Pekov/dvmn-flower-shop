@@ -183,7 +183,8 @@ bottom: 0;
      text-align: center; /* Выравнивание по центру */
      height: 100%; /* Высота на весь слой */
      color: #666; /* Цвет ссылки */
-    }
+}
+
 /*.recommended__block_first {
 	background: url('../images/recommendedBg1.jpg') no-repeat center bottom / cover;
 }
