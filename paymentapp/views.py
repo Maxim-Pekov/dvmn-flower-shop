@@ -15,7 +15,7 @@ def make_payment(request):
     payment_token = payload.get('payment_token')
     amount = payload.get('price')
     description = payload.get('title')
-    print(f'{amount= }')
+    # print(f'{amount= }')
 
     payment = Payment.create({
         "payment_token": payment_token,
