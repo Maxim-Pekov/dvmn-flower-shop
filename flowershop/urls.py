@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from bucketorderapp import views
+from paymentapp.views import make_payment
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('order_step/', views.order_step_view, name='order_step'),
     path('admin/', admin.site.urls),
     path('card/<int:card_id>/', views.card_view, name='card_view'),
+    path('payment/', make_payment, name='make_payment')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
