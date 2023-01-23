@@ -7,7 +7,7 @@ from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
 
 
 def index(request):
-    bouquets = Bouquet.objects.all()
+    bouquets = Bouquet.objects.all().order_by('?')
 
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -24,7 +24,7 @@ def index(request):
 
 
 def catalog_view(request):
-    bouquets = Bouquet.objects.all()
+    bouquets = Bouquet.objects.all().order_by('?')
     context = {
         'bouquets': bouquets
     }
