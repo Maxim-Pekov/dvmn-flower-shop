@@ -107,9 +107,12 @@ class Order(models.Model):
     address = models.CharField('Адрес', max_length=200, null=True, blank=True)
     phone = PhoneNumberField('Телефон', db_index=True)
     delievry_date = models.DateTimeField('Дата и время доставки', null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return self.profile.name, self.bouquet.title
+        return f'Заказ №{self.pk} - {self.customer} - {self.bouquet.title}'
 
     class Meta:
         verbose_name = 'Заказ'

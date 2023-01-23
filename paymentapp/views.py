@@ -1,21 +1,20 @@
-from django.shortcuts import render
 from yookassa import Configuration, Payment
 from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from bucketorderapp.models import Order
 
 
 def make_payment(request):
 
-    Configuration.account_id = '964811'
-    Configuration.secret_key = 'test_6usWO5DsDOJZcaL9YN3eE7Ce9_GVUWj9-k7NPqo0A1A'
+    Configuration.account_id = YOOKASSA_SHOP_ID
+    Configuration.secret_key = YOOKASSA_API_KEY
 
     payload = dict(request.POST.items())
 
     payment_token = payload.get('payment_token')
     amount = payload.get('price')
     description = payload.get('title')
-    print(f'{amount= }')
+    order_number = payload.get('order_number')
 
     payment = Payment.create({
         "payment_token": payment_token,
@@ -25,11 +24,17 @@ def make_payment(request):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "https://www.example.com/return_url"
+            "return_url": f"http://127.0.0.1:8000/order_status/{order_number}"
         },
-        "capture": False,
+        "capture": True,
         "description": description
         }
     )
-    print(payment.status)
-    return HttpResponse('OKK')
+    if payment.status == 'pending':
+        order = Order.objects.get(id=order_number)
+        order.payment_id = payment.id
+        order.save()
+        return HttpResponse(payment.confirmation.confirmation_url)
+    else:
+        print(payment.status)
+        return HttpResponse('OK')
