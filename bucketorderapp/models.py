@@ -80,7 +80,7 @@ class Courier(models.Model):
 
 
 class Order(models.Model):
-    customer = models.CharField('Заказчик', max_length=100, unique=True)
+    customer = models.CharField('Заказчик', max_length=100,)
     bouquet = models.ForeignKey(
         Bouquet,
         on_delete=models.CASCADE,
