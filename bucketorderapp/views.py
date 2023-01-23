@@ -62,14 +62,11 @@ def result_view(request, category: str, budget: int ):
     print(category, budget)
     if 0 < budget < 1000:
         print(budget)
-        bouquets = Bouquet.objects.filter(categories=category).filter(
-            price__lt=1000).order_by("?")
+        bouquets = Bouquet.objects.filter(categories=category).filter(price__lt=1000).order_by("?")
     elif 1000 <= budget < 5000:
-        bouquets = Bouquet.objects.filter(categories=category).filter(
-            price__lt=5000).filter(price__gte=1000).order_by("?")
+        bouquets = Bouquet.objects.filter(categories=category).filter(price__lt=5000).filter(price__gte=1000).order_by("?")
     elif 5000 <= budget:
-        bouquets = Bouquet.objects.filter(categories=category).filter(
-            price__gte=5000).order_by("?")
+        bouquets = Bouquet.objects.filter(categories=category).filter(price__gte=5000).order_by("?")
     else:
         bouquets = Bouquet.objects.filter(categories=category).order_by("?")
 
