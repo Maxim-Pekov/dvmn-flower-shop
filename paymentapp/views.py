@@ -1,5 +1,5 @@
 from yookassa import Configuration, Payment
-from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
+from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID, HOST_ADDRESS
 from django.http import HttpResponse
 from bucketorderapp.models import Order
 
@@ -25,7 +25,7 @@ def make_payment(request):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": f"http://127.0.0.1:8000/order_status/{order_number}"
+            "return_url": f"http://{HOST_ADDRESS}/order_status/{order_number}"
         },
         "capture": True,
         "description": description
