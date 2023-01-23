@@ -20,7 +20,7 @@ $(document).ready(function(){
                 const { paymentToken } = res.data.response;
                 const payment_price = document.querySelector('#payment_price').innerText;
                 const payment_title = document.querySelector('#payment_title').innerText;
-                console.log(paymentToken)
+                const orderNumber = document.querySelector('#order_number').value;
                 $.ajax({
                     type: "post",
                     url: "/payment/",
@@ -29,14 +29,14 @@ $(document).ready(function(){
                         csrfmiddlewaretoken: csrf,
                         price: payment_price,
                         title: payment_title,
+                        order_number: orderNumber, 
                     },
                     
                     success: function(response) {
-                        console.log(response);
+                        window.location.href = response;
                     }
                 });
         
-                return paymentToken;
             }
             if (res.status === 'error') {
                 document.querySelector('#message_line').innerText = 'Данные карты невалидны';
