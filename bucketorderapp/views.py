@@ -1,7 +1,12 @@
-from .models import Bouquet
+from .models import Bouquet, Category
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import UserForm, ConsultationForm
+
+
+category_ = ''
+budget_ = 0
+color_ = 'white'
 
 
 def index(request):
@@ -30,28 +35,52 @@ def catalog_view(request):
 
 
 def quiz_view(request):
-    return render(request, 'quiz.html')
-
-
-def quiz_step_view(request):
-    payload = dict(request.POST.items())
-    occasion = payload.get('occasion')
+    categories = Category.objects.all()
     context = {
-        'occasion': occasion
+        'categories': categories
     }
-    return render(request, 'quiz-step.html', context=context)
+    return render(request, 'quiz.html', context)
 
 
-def result_view(request):
+def quiz_step_view(request, category: str):
+    print('category ----------', category)
+    category_ = category
+    # payload = dict(request.POST.items())
+    # occasion = payload.get('occasion')
+    context = {
+        'category': category
+        # 'occasion': occasion
+    }
+    return render(request, 'quiz-step.html', context)
 
-    payload = dict(request.POST.items())
-    budget = payload.get('budget')
-    occasion = payload.get('occasion')
 
-    bouquet = recommend_bouquet(budget, occasion)
+def result_view(request, category: str, budget: int ):
+    category = Category.objects.get(title=category)
+    print(category, budget)
+    if 0 < budget < 1000:
+        print(budget)
+        bouquets = Bouquet.objects.filter(categories=category).filter(
+            price__lt=1000).order_by("?")
+    elif 1000 <= budget < 5000:
+        bouquets = Bouquet.objects.filter(categories=category).filter(
+            price__lt=5000).filter(price__gte=1000).order_by("?")
+    elif 5000 <= budget:
+        bouquets = Bouquet.objects.filter(categories=category).filter(
+            price__gte=5000).order_by("?")
+    else:
+        bouquets = Bouquet.objects.filter(categories=category).order_by("?")
+
+    try:
+        bouquet = bouquets[0]
+    except IndexError:
+        bouquet = None
+    except KeyError:
+        bouquet = None
+
     if bouquet is None:
         bouquet = {}
-        bouquet['title'] = 'Милорд, база букетов пуста'
+        bouquet['title'] = 'Милорд, в базе нет букета подходящего по ' \
+                           'параметрам'
         bouquet['price'] = 0
         flowers = None
     else:
