@@ -113,6 +113,20 @@ def recommend_bouquet(budget, occasion):
 def card_view(request, card_id: int):
     bouquets = Bouquet.objects.filter(id=card_id)
     context = {
-        'bouquet': bouquets[0]
+        'bouquet': bouquets[0],
+        'form': UserForm(),
+    }
+
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'card.html', context)
+        context = {'form': form, 'bouquets': bouquets[0]}
+        return render(request, 'index.html', context)
+
+    context = {
+        'bouquet': bouquets[0],
+        'form': UserForm(),
     }
     return render(request, 'card.html', context)
