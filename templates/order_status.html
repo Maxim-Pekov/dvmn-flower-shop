@@ -23,57 +23,20 @@
 			</div>
 		</div>
 	</header>
-	<section id="card">
+
+	<section id="order">
 		<div class="container">
-			<div class="card ficb">
-				<div class="card__block card__block_first">
-					<img src="{{ bouquet.image.url }}" alt="img"
-						 class="card__img">
-				</div>
-				<div class="card__block card__block_sec">
-					<div class="title">{{bouquet.title}}</div>
-					<div class="card__block_price">{{bouquet.price|floatformat }} руб</div>
-					<div class="card__elems ">
-						<span class="card__elems_intro">Состав</span>
-						<div class="card__items">
-							{% for flower in bouquet.flowers.all %}
-								<span class="card_items_intro">
-									{{flower.title}} - {{flower.count_flower}}
-								</span>
-							{% endfor %}
-						</div>
+			<div class="order">
+				<div class="order__block">
+					<div class="order_items">
+						<div class="title">Статус оплаты заказа № {{ order_number }}</div>
+						<div class="result__items_price">{{ message }}</div>
 					</div>
-					<div class="card__elems ">
-						<span class="card__elems_intro">Размер</span>
-						<div class="card__items">
-							<span class="card_items_intro">
-								Высота - 50 см
-							</span>
-							<span class="card_items_intro">
-								Ширина - 30 см
-							</span>
-						</div>
-					</div>
-					<form action="/order/" method="post">
-						{% csrf_token %}
-						<input name="bouquet_price" value="{{ bouquet.price }}" type="hidden">
-						<input name="bouquet_title" value="{{ bouquet.title }}" type="hidden">
-						<button class="btn largeBtn card__btn">Заказать букет</button>
-					</form>
+					
 				</div>
 			</div>
 		</div>
-	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form" method="POST">
-					{% csrf_token %}
-						{{form}}
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
-		</div>
+		<img src="{% static 'images/orderImg.jpg' %}" alt="orderImg" class="order__img">
 	</section>
 	<footer id="footer">
 		<div class="container">
@@ -86,7 +49,7 @@
 						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
-				<hr class="line"></hr>
+				<hr class="line">
 				<a href="#" class="footer__poli">Политика конфиденциальности</a>
 				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
 			</div>

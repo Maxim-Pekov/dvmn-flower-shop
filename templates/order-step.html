@@ -28,12 +28,13 @@
 			<div class="order orderStep">
 				<div class="order__block">
 					<div class="order_items">
-						<div class="title">Оплата</div>
+						<div class="title">Оплата заказа № {{ order_number }}</div>
 						<div id="payment_title" class="title result__items_title">{{ bouquet_title }}</div>
 						<div id="payment_price" class="result__items_price">{{ bouquet_price }}</div>
 						<form action="#" class="order__form orderStep_form">
 							<div class="order__form_block">
 								<div class="order__form_items">
+									<input id="order_number" value="{{ order_number }}" type="hidden">
 									<div class="order__form_intro">номер карты</div>
 									<input id="cardNum" type="text" name="cardNum" class="order__form_input orderStep_form_input" placeholder="Введите номер" required>
 									<div class="order__form_item fic">

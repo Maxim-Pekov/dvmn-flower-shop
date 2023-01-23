@@ -1,7 +1,10 @@
-from .models import Bouquet, Category
+from .models import Bouquet, Category, Order
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import UserForm, ConsultationForm
+from yookassa import Payment, Configuration
+from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
 
 
 category_ = ''
@@ -10,7 +13,7 @@ color_ = 'white'
 
 
 def index(request):
-    bouquets = Bouquet.objects.all()
+    bouquets = Bouquet.objects.all().order_by('?')
 
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -27,7 +30,7 @@ def index(request):
 
 
 def catalog_view(request):
-    bouquets = Bouquet.objects.all()
+    bouquets = Bouquet.objects.all().order_by('?')
     context = {
         'bouquets': bouquets
     }
@@ -127,10 +130,10 @@ def order_view(request):
 def order_step_view(request):
     context = {}
     if request.method == "POST":
-        print(request.POST)
+        order_number = save_order(request.POST)
         context['bouquet_title'] = request.POST['bouquet_title']
         context['bouquet_price'] = request.POST['bouquet_price']
-        print(context)
+        context['order_number'] = order_number
         return render(request, 'order-step.html', context=context)
     return render(request, 'order-step.html')
 
@@ -142,6 +145,49 @@ def recommend_bouquet(budget, occasion):
 def card_view(request, card_id: int):
     bouquets = Bouquet.objects.filter(id=card_id)
     context = {
-        'bouquet': bouquets[0]
+        'bouquet': bouquets[0],
+        'form': UserForm(),
+    }
+
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'card.html', context)
+        context = {'form': form, 'bouquets': bouquets[0]}
+        return render(request, 'index.html', context)
+
+    context = {
+        'bouquet': bouquets[0],
+        'form': UserForm(),
     }
     return render(request, 'card.html', context)
+
+
+def order_status_view(request, order_number: int):
+    order = Order.objects.get(id=order_number)
+    payment_id = order.payment_id
+
+    Configuration.account_id = YOOKASSA_SHOP_ID
+    Configuration.secret_key = YOOKASSA_API_KEY
+    payment = Payment.find_one(payment_id)
+    context = {
+        'order_number': order_number,
+        'message': payment.status,
+    }
+    return render(request, 'order_status.html', context)
+
+
+def save_order(POST_dict):
+    bouquet_name = POST_dict['bouquet_title']
+    customer_name = POST_dict['name']
+    customer_phone = POST_dict['phone']
+    delivery_address = POST_dict['address']
+    bouquet = Bouquet.objects.filter(title=bouquet_name).first()
+    order = Order.objects.create(
+        customer=customer_name,
+        phone=customer_phone,
+        address=delivery_address,
+        bouquet=bouquet
+    )
+    return order.pk
