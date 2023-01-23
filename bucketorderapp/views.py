@@ -4,6 +4,7 @@ from django.urls import reverse
 from .forms import UserForm, ConsultationForm
 from yookassa import Payment, Configuration
 from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
+from django.contrib import messages
 
 
 def index(request):
@@ -13,6 +14,7 @@ def index(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Заявка успешно создана')
             return redirect(reverse('index'))
         context = {'form': form, 'bouquets': bouquets}
         return render(request, 'index.html', context)
@@ -81,6 +83,7 @@ def consultation_view(request):
         form = ConsultationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Заявка успешно создана')
             return redirect(reverse('consultation'))
         context = {'form': form}
         return render(request, 'consultation.html', context)
