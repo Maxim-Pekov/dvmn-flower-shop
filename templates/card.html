@@ -54,7 +54,12 @@
 							</span>
 						</div>
 					</div>
-					<button class="btn largeBtn card__btn">Заказать букет</button>
+					<form action="/order/" method="post">
+						{% csrf_token %}
+						<input name="bouquet_price" value="{{ bouquet.price }}" type="hidden">
+						<input name="bouquet_title" value="{{ bouquet.title }}" type="hidden">
+						<button class="btn largeBtn card__btn">Заказать букет</button>
+					</form>
 				</div>
 			</div>
 		</div>
