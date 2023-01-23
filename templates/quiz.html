@@ -33,12 +33,11 @@
 				<div class="quiz__block">
 					<h1 class="quiz__title">К какому событию нужен букет?</h1>
 					<div class="quiz__elems fic">
-						<form action="/quiz_step/" method="post">
-					{% csrf_token %}
-						<a href="{% url 'quiz_step' %}"><button class="quiz__elem" name="occasion" value="marriage">Свадьба</button></a>
-						<a href="{% url 'quiz_step' %}"><button class="quiz__elem" name="occasion" value="birthday">День рождения</button></a>
-						<a href="{% url 'quiz_step' %}"><button class="quiz__elem" name="occasion" value="None">Без повода</button></a>
-						</form>
+						{% for category in categories %}
+							<a href="{% url 'quiz_step_view' category %}"><button
+									class="quiz__elem" value="marriage">
+								{{category}}</button></a>
+						{% endfor %}
 					</div>
 					<div class="quiz__progress">
 						<div class="quiz__progress_step">

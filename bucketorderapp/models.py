@@ -27,7 +27,7 @@ class Bouquet(models.Model):
         related_name='bouquet_flowers',
         verbose_name='Цветы'
     )
-    Categories = models.ForeignKey(
+    categories = models.ForeignKey(
         Category,
         related_name='bouquets',
         verbose_name='Категории',
