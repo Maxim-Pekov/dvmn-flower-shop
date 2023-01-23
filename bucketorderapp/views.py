@@ -30,7 +30,7 @@ def index(request):
 
 
 def catalog_view(request):
-    bouquets = Bouquet.objects.all().order_by('?')
+    bouquets = Bouquet.objects.all()
     context = {
         'bouquets': bouquets
     }
