@@ -175,6 +175,10 @@ def order_status_view(request, order_number: int):
         'order_number': order_number,
         'message': payment.status,
     }
+    print(payment.paid)
+    if payment.paid is True:
+        order.is_paid = True
+        order.save()
     return render(request, 'order_status.html', context)
 
 
