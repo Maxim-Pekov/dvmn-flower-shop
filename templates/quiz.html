@@ -34,9 +34,11 @@
 					<h1 class="quiz__title">К какому событию нужен букет?</h1>
 					<div class="quiz__elems fic">
 						{% for category in categories %}
-							<a href="{% url 'quiz_step_view' category %}"><button
-									class="quiz__elem" value="marriage">
-								{{category}}</button></a>
+							<a href="{% url 'quiz_step_view' category %}">
+								<button	class="quiz__elem" value="marriage">
+									{{category}}
+								</button>
+							</a>
 						{% endfor %}
 					</div>
 					<div class="quiz__progress">

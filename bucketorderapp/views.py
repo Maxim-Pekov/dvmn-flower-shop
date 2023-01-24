@@ -8,11 +8,6 @@ from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID
 from django.contrib import messages
 
 
-category_ = ''
-budget_ = 0
-color_ = 'white'
-
-
 def index(request):
     bouquets = Bouquet.objects.all().order_by('?')
 
@@ -48,13 +43,8 @@ def quiz_view(request):
 
 
 def quiz_step_view(request, category: str):
-    print('category ----------', category)
-    category_ = category
-    # payload = dict(request.POST.items())
-    # occasion = payload.get('occasion')
     context = {
         'category': category
-        # 'occasion': occasion
     }
     return render(request, 'quiz-step.html', context)
 
