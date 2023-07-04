@@ -1,6 +1,8 @@
 $(document).ready(function(){
-    // действия, которые необходимо выполнить после загрузки документа...
     $(document).on('click', '.order__form_pay', function(e) {
+        let btnPay = e.target;
+        btnPay.style.opacity = 0.2;
+        btnPay.disable = true;
         document.querySelector('#message_line').innerText = '';
         const checkout = YooMoneyCheckout('964811');
         const cardNum = document.querySelector('#cardNum').value;
@@ -9,7 +11,6 @@ $(document).ready(function(){
         const cardYear = document.querySelector('#cardYear').value;
 
         let csrf = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        console.log(cardNum);
         checkout.tokenize({
             number: cardNum,
             cvc: cardCVC,
@@ -33,15 +34,24 @@ $(document).ready(function(){
                     },
                     
                     success: function(response) {
+                        btnPay.disable = false;
+                        btnPay.style.opacity = 1;
                         window.location.href = response;
-                    }
+                    },
+
+                    error: function(response) {
+                        btnPay.disable = false;
+                        btnPay.style.opacity = 1;
+                        document.querySelector('#message_line').innerText = 'Ошибка платежа';
+                    },
                 });
         
             }
             if (res.status === 'error') {
+                btnPay.disable = false;
+                btnPay.style.opacity = 1;
                 document.querySelector('#message_line').innerText = 'Данные карты невалидны';
             }
         });
-        console.log(checkout);
     })
 });

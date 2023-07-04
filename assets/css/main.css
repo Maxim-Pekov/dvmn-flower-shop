@@ -716,11 +716,11 @@ margin-bottom: 5px;
 .orderStep_form input[name="cardCvc"] {
 	width: 91px;
 }
-
+/*
 .orderStep .order_items {
 	
 }
-
+*/
 /*consultation.html*/
 #singUpConsultation {
 	position: relative;

@@ -1,6 +1,6 @@
 from yookassa import Configuration, Payment
 from flowershop.settings import YOOKASSA_API_KEY, YOOKASSA_SHOP_ID, HOST_ADDRESS
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from bucketorderapp.models import Order
 
 
@@ -31,11 +31,16 @@ def make_payment(request):
         "description": description
         }
     )
+    print(payment.status)
     if payment.status == 'pending':
         order = Order.objects.get(id=order_number)
         order.payment_id = payment.id
         order.save()
         return HttpResponse(payment.confirmation.confirmation_url)
+    elif payment.status == 'succeeded':
+        order = Order.objects.get(id=order_number)
+        order.payment_id = payment.id
+        order.save()
+        return HttpResponse(f"http://{HOST_ADDRESS}/order_status/{order_number}")
     else:
-        print(payment.status)
-        return HttpResponse('OK')
+        return HttpResponseServerError('Payment creation error')
