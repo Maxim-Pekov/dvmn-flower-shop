@@ -33,7 +33,7 @@ class FlowerAdmin(admin.ModelAdmin):
 @admin.register(Bouquet)
 class BouquetAdmin(admin.ModelAdmin):
     list_display = ('title', 'price', get_image_preview_markup, 'description',)
-    fields = ('title', 'price', 'preview', 'image',)
+    fields = ('title', 'price', get_image_preview_markup, 'image',)
     readonly_fields = (get_image_preview_markup,)
     sortable_by = ('price', 'title')
     list_filter = ('categories', 'price')
